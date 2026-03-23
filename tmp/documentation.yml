@@ -11,10 +11,6 @@ jobs:
     name: Build and publish documentation
     runs-on: ubuntu-latest
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
