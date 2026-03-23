@@ -1,4 +1,4 @@
-name: Documentation4
+name: Documentation
 
 permissions:
   contents: read
@@ -51,13 +51,13 @@ jobs:
           uses: actions/upload-pages-artifact@v3
           with:
             # WICHTIG: Prüfe, ob deine Doku wirklich hier liegt:
-            path: ./docs/html 
+            path: ./docs/html
 
   deploy:
       name: Deploy to GitHub Pages
       needs: build             # Wartet, bis der Build-Job fertig ist
       runs-on: ubuntu-latest
-      
+
       environment:
         name: github-pages     # Dies erzeugt den Eintrag in der Sidebar
         url: ${{ steps.deployment.outputs.page_url }}
