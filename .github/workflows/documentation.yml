@@ -1,4 +1,4 @@
-name: Documentation3
+name: Documentation4
 
 permissions:
   contents: read
@@ -53,7 +53,16 @@ jobs:
             # WICHTIG: Prüfe, ob deine Doku wirklich hier liegt:
             path: ./docs/html 
 
-        # SCHRITT 2: Das offizielle Deployment triggern
+  deploy:
+      name: Deploy to GitHub Pages
+      needs: build             # Wartet, bis der Build-Job fertig ist
+      runs-on: ubuntu-latest
+      
+      environment:
+        name: github-pages     # Dies erzeugt den Eintrag in der Sidebar
+        url: ${{ steps.deployment.outputs.page_url }}
+
+      steps:
         - name: Deploy to GitHub Pages
           id: deployment
           uses: actions/deploy-pages@v4
