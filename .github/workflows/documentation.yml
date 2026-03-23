@@ -51,7 +51,7 @@ jobs:
           uses: actions/upload-pages-artifact@v3
           with:
             # WICHTIG: Prüfe, ob deine Doku wirklich hier liegt:
-            path: ./build/docs/html 
+            path: ./docs/html 
 
         # SCHRITT 2: Das offizielle Deployment triggern
         - name: Deploy to GitHub Pages
