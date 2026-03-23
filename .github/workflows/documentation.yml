@@ -42,6 +42,11 @@ jobs:
           run: cmake --build build --config Debug --target docs -j$(nproc)
 
         # SCHRITT 1: Das HTML-Verzeichnis für GitHub Pages "verpacken"
+
+        - name: Debug
+          run: |
+            echo "Suche nach html Ordner..."
+            find . -name "index.html"
         - name: Upload Pages Artifact
           uses: actions/upload-pages-artifact@v3
           with:
