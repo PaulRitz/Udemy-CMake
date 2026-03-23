@@ -34,6 +34,20 @@ jobs:
     - name: run ctest
       working-directory: build
       run: ctest .
+      
+    - name: building and testing
+      run: |
+        cmake --build build --config Debug -j$(nproc)
+        # Wir führen die Tests aus, um die .gcda Dateien zu erzeugen
+        cd build && ctest . && cd ..
+        
+        # Jetzt rufen wir gcovr manuell auf und ignorieren Abhängigkeiten
+        mkdir -p build/coverage
+        gcovr -r . \
+          --filter src/ \
+          --exclude "_deps/" \
+          --exclude "tests/" \
+          --xml-pretty -o build/coverage/coverage.cobertura.xml
 
     - name: Code Coverage Report
       uses: irongut/CodeCoverageSummary@v1.3.0
