@@ -30,7 +30,19 @@ jobs:
         # Erst bauen, dann Coverage-Target ausführen
         cmake --build build --config Debug -j$(nproc)
         cmake --build build --target coverage
-        
+    
+    - name: Generate Manual Coverage Report
+      run: |
+        mkdir -p build/coverage
+        gcovr -r . \
+          --filter src/ \
+          --exclude "_deps/" \
+          --exclude "tests/" \
+          --gcov-ignore-errors=source_not_found \
+          --gcov-ignore-errors=no_working_dir_found \
+          --xml-pretty -o build/coverage/coverage.cobertura.xml \
+          --print-summary
+    
     - name: run ctest
       working-directory: build
       run: ctest .
